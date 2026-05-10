@@ -21,7 +21,7 @@ Three concurrent loops handle different responsibilities:
 ## Strategies
 
 | Strategy | Regime | Signal |
-|----------|--------|---------|
+|----------|--------|--------|
 | BTC Range Trading | RANGE | Buy near swing support, RSI + taker volume confirm |
 | Sector Momentum | RANGE/TRENDING | 4H EMA20 pullback in leading sector, 8/12 score gate |
 | Squeeze Breakout | TRENDING | Bollinger compression → expansion + ADX |
@@ -143,10 +143,10 @@ DISABLE_CHARTS=0        # 1 = skip charts (saves RAM)
 
 ## Design Notes
 
-- **`main.py` never imports from `dashboard.py`** — the dashboard is bound at startup via `init_dashboard()`, keeping trading logic isolated from the HTTP layer.
+- **`main.py` never imports from `dashboard.py`** — the dashboard is bound at startup via `init_dashboard()`, keeping trading logic fully isolated from the HTTP layer.
 - **SQLite over Postgres** — single process, WAL mode gives crash recovery with zero ops overhead.
-- **Paper mode by default** — `Broker` class abstracts paper/live. Switching to live requires only `EXECUTION_MODE=LIVE` + `/reconcile`, no code changes.
-- **No backtesting** — survivorship bias and realistic slippage simulation make crypto backtests misleading. Paper forward-testing gives honest data.
+- **Paper mode by default** — `Broker` class abstracts paper/live. Switching to live requires only `EXECUTION_MODE=LIVE` + running `/reconcile`, no code changes.
+- **No backtesting** — survivorship bias and realistic slippage simulation make crypto backtests misleading. Forward-testing in paper mode gives honest data.
 
 ---
 

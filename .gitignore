@@ -36,5 +36,5 @@ env/
 .DS_Store
 Thumbs.db
 
-# Charts (generated at runtime)
+# Charts
 *.png
